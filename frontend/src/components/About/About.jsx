@@ -1,5 +1,6 @@
 import React from 'react'
 import suhas from '../../assets/suhas_bullet_1.jpg'
+import suhas2 from '../../assets/suhas_bullet_2.jpg'
 
 const About = () => {
   return (
@@ -9,7 +10,7 @@ const About = () => {
         {/* Profile Image */}
         <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden border-4 border-yellow-500 shadow-[0_0_40px_#FFD700]">
           <img 
-            src={suhas} 
+            src={suhas2} 
             alt="About Me" 
             className="w-full h-full object-cover transform hover:scale-105 transition duration-500"
           />
