@@ -1,70 +1,178 @@
-import React from 'react'
-import suhas from '../../assets/suhas_bullet_1.jpg'
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
-import resume from '../../assets/ANN practical execution.pdf'
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import resume from "../../assets/Resume_Suhas.pdf";
 
 const Home = () => {
+  const [showRole, setShowRole] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
+
+  useEffect(() => {
+    const roleTimer = setTimeout(() => setShowRole(true), 1200);
+    const descTimer = setTimeout(() => setShowDesc(true), 2200);
+    return () => {
+      clearTimeout(roleTimer);
+      clearTimeout(descTimer);
+    };
+  }, []);
+
+  const name = "Suhas Jadhav";
+
+  // The paragraph we’ll animate word by word
+  const description =
+    "I build high-performance, visually refined, and user-focused web applications using modern technologies in the MERN stack. I craft clean, maintainable, and scalable solutions that bring ideas to life.";
+
+  // Split description into words
+  const words = description.split(" ");
+
   return (
     <section
       id="home"
-      className="min-h-screen pt-[80px] flex flex-col-reverse lg:flex-row items-center justify-center px-6 sm:px-10 bg-black text-yellow-400 gap-10 lg:gap-20"
+      className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 bg-[#F9FAFB] text-slate-900 relative overflow-hidden"
     >
-      {/* Left Side - Text */}
-      <div className="flex-1 text-center lg:text-left max-w-xl">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-snug mb-4">
-          Hi! I am <span className="text-yellow-600">Suhas Jadhav</span>
-        </h1>
-        <p className="text-xl sm:text-2xl lg:text-2xl font-medium mb-4">
-          Full Stack Web Developer
-        </p>
-        <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-6">
-          I specialize in building high-performance, visually stunning, and user-friendly web applications 
-          using the latest technologies in the MERN stack.
-        </p>
+      <div className="max-w-3xl text-center">
+        {/* Greeting */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-3xl sm:text-4xl font-semibold mb-3"
+        >
+          Hi! I’m
+        </motion.h1>
+
+        {/* Animated Name */}
+        <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 flex justify-center">
+          {name.split("").map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.05,
+                type: "spring",
+                stiffness: 200,
+              }}
+              className={
+                char === " "
+                  ? "mx-1"
+                  : "text-amber-500 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]"
+              }
+            >
+              {char}
+            </motion.span>
+          ))}
+
+          {/* Custom Blinking Cursor */}
+          <motion.span
+            className="ml-1 text-amber-600 font-bold"
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ repeat: Infinity, duration: 1 }}
+          >
+            |
+          </motion.span>
+        </motion.h1>
+
+        {/* Role Reveal */}
+        {showRole && (
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-xl sm:text-2xl font-semibold mb-4 text-slate-700"
+          >
+            Full Stack Web Developer
+          </motion.p>
+        )}
+
+        {/* Word-by-word description animation */}
+        {showDesc && (
+          <motion.div
+            className="text-base sm:text-lg text-slate-600 mb-8 flex flex-wrap justify-center"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.05,
+                },
+              },
+            }}
+          >
+            {words.map((word, index) => (
+              <motion.span
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.3 }}
+                className="mr-2"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.div>
+        )}
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center lg:justify-start">
-          <a 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.8, duration: 0.8 }}
+          className="flex flex-col sm:flex-row gap-4 mb-10 justify-center"
+        >
+          <a
             href="#projects"
-            className="px-6 py-3 bg-yellow-500 text-black rounded-md font-semibold hover:bg-yellow-400 transition"
+            className="px-6 py-3 bg-amber-500 text-white rounded-md font-semibold hover:bg-amber-600 transition-all"
           >
             View My Work
           </a>
-          <a 
-            href={resume} 
+          <a
+            href={resume}
             download="Suhas_Jadhav_Resume.pdf"
-            className="px-6 py-3 border border-yellow-500 text-yellow-400 rounded-md font-semibold hover:bg-yellow-500 hover:text-black transition"
+            className="px-6 py-3 border border-amber-500 text-amber-600 rounded-md font-semibold hover:bg-amber-500 hover:text-white transition-all"
           >
             Download Resume
           </a>
-        </div>
+        </motion.div>
 
-        {/* Social Icons */}
-        <div className="flex justify-center lg:justify-start gap-6 text-2xl sm:text-3xl">
-          <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition">
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.2, duration: 1 }}
+          className="flex justify-center gap-8 text-2xl text-slate-700"
+        >
+          <a
+            href="https://github.com/SuhasJadhavSJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-500 transition-all"
+          >
             <FaGithub />
           </a>
-          <a href="https://www.instagram.com/your-instagram" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition">
+          <a
+            href="https://www.instagram.com/suhas__jadhav/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-500 transition-all"
+          >
             <FaInstagram />
           </a>
-          <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition">
+          <a
+            href="https://www.linkedin.com/in/suhas-jadhav-60214420b"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-500 transition-all"
+          >
             <FaLinkedin />
           </a>
-        </div>
-      </div>
-
-      {/* Right Side - Image */}
-      <div className="flex-1 flex justify-center">
-        <div className="w-56 sm:w-64 lg:w-96 xl:w-[28rem] h-56 sm:h-64 lg:h-96 xl:h-[28rem] rounded-full overflow-hidden border-4 border-yellow-500 shadow-[0_0_40px_#FFD700]">
-          <img 
-            className="w-full h-full object-cover transform hover:scale-105 transition duration-500"
-            src={suhas} 
-            alt="Profile_Image" 
-          />
-        </div>
+        </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -24,19 +24,19 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen flex flex-col justify-center items-center bg-black text-yellow-400 px-4"
+      className="min-h-screen flex flex-col justify-center items-center bg-[#F9FAFB] text-slate-900 px-4 pt-16 pb-8"
     >
       <div className="max-w-4xl w-full">
-        <h2 className="text-4xl font-bold mb-6 text-center border-b-4 border-yellow-400 inline-block">
-          Contact
+        <h2 className="text-4xl font-bold mb-6 text-center">
+          Contact <span className="text-amber-500">Me</span>
         </h2>
-        <p className="text-center mb-10 text-gray-300">
-          Feel free to reach out to me for collaborations, project discussions, or just a friendly chat.
+        <p className="text-center mb-10 text-slate-600">
+          Feel free to reach out for collaborations, freelance work, or just to say hello.
         </p>
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-6 bg-gray-900 p-8 rounded-lg shadow-lg"
+          className="flex flex-col gap-6 bg-white p-8 rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(245,158,11,0.1)]"
         >
           <input
             type="text"
@@ -45,7 +45,7 @@ const Contact = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="p-3 rounded-md border border-yellow-400 bg-transparent text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="p-3 rounded-md border border-gray-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
           />
 
           <input
@@ -55,7 +55,7 @@ const Contact = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="p-3 rounded-md border border-yellow-400 bg-transparent text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="p-3 rounded-md border border-gray-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
           />
 
           <textarea
@@ -65,12 +65,12 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             required
-            className="p-3 rounded-md border border-yellow-400 bg-transparent text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="p-3 rounded-md border border-gray-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
           ></textarea>
 
           <button
             type="submit"
-            className="bg-yellow-400 text-black font-bold py-3 rounded-md hover:bg-yellow-300 transition-all duration-300"
+            className="bg-amber-500 text-white font-semibold py-3 rounded-md hover:bg-amber-600 transition-all duration-300"
           >
             Send Message
           </button>
