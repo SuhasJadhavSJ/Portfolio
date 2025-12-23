@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+/* ===============================
+   DESIGN TOKENS — PALETTE 2
+   =============================== */
+
+:root {
+  --bg-dark: #05070D;        /* Deep space black */
+  --surface: #0B1220;       /* Glassy dark blue */
+  --primary: #00E5FF;       /* Electric cyan */
+  --secondary: #7C7CFF;     /* Soft electric violet */
+  --text-main: #EAF2FF;     /* Cool white */
+  --text-muted: #8B9BB4;    /* Bluish gray */
+  --border-subtle: #16213A; /* Cold border */
+    --thm-red: #ff4d4d;
+  --thm-red-soft: rgba(255, 77, 77, 0.35);
+}
+
+
+
+
+/* Global base */
+html,
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  cursor: none; /* IMPORTANT for custom cursor */
+}
+
+html {
+  scroll-behavior: smooth;
+}

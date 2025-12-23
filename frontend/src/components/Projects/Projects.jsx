@@ -1,138 +1,150 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import genAI from "../../assets/AI.jpeg";
-import weather from "../../assets/weather.png";
-import unity from "../../assets/sharing.png";
-import resQ from "../../assets/animal.jpg";
+import { resQHome, unityShare, pathForge } from "../../assets";
+const projects = [
+  {
+    title: "ResQHome",
+    subtitle: "MERN-based emergency response & coordination platform",
+    description:
+      "ResQHome is a full-stack MERN application designed to coordinate emergency responses efficiently. The platform handles authentication, role-based access, real-time data flow, and backend APIs — making it a realistic attack surface for testing authentication, authorization, and data exposure flaws.",
+    image: resQHome,
+    link: "#",
+  },
+  {
+    title: "PathForge",
+    subtitle: "AI-assisted career guidance & recommendation system",
+    description:
+      "PathForge is a MERN application focused on personalized career pathways and recommendations. From a security perspective, it presents complex logic flows, user data handling, and API interactions that are ideal for analyzing access control, business logic flaws, and injection vectors.",
+    image: pathForge,
+    link: "https://path-forge-kappa.vercel.app/",
+  },
+  {
+    title: "UnityShare",
+    subtitle: "Community-driven resource sharing platform",
+    description:
+      "UnityShare enables users to share and manage resources within a community. Built on the MERN stack, it includes authentication flows, CRUD operations, and backend validations — offering practical exposure to common web security risks and mitigation strategies.",
+    image: unityShare,
+    link: "#",
+  },
+];
 
 const Projects = () => {
-  const projectData = [
-    {
-      title: "ResQHome",
-      description:
-        "A smart emergency response platform connecting users with nearby service providers and support systems in real-time. Built with MERN and cloud integration.",
-      image: resQ,
-      github: "https://github.com/yourusername/resqhome",
-      live: "https://resqhome-live-demo.com",
-    },
-    {
-      title: "UnityShare",
-      description:
-        "A secure platform for real-time file sharing and collaboration with an intuitive interface, focusing on accessibility and speed.",
-      image: unity,
-      github: "https://github.com/yourusername/unityshare",
-      live: "https://unityshare-demo.com",
-    },
-    {
-      title: "GenAI",
-      description:
-        "An AI-powered web application that generates content, assists with tasks, and provides intelligent insights using advanced AI models.",
-      image: genAI,
-      github: "https://github.com/yourusername/genai",
-      live: "https://genai-live-demo.com",
-    },
-    {
-      title: "WeatherDetection",
-      description:
-        "A responsive Weather Detection app built using modern APIs, providing real-time forecasts with clean UI and fast performance.",
-      image: weather,
-      github: "https://github.com/yourusername/weather-detection",
-      live: "https://weatherrcheck.netlify.app/",
-    },
-  ];
-
-  // Animation variants for bounce from left/right
-  const cardVariants = (index) => ({
-    hidden: {
-      opacity: 0,
-      x: index % 2 === 0 ? -150 : 150, // alternate directions
-      y: -30,
-    },
-    show: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-        duration: 0.8,
-      },
-    },
-  });
-
   return (
-    <section id="projects" className="bg-[#F9FAFB] py-20">
-      <motion.div
-        className="max-w-6xl mx-auto px-6"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }} // only triggers when section enters view
-      >
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-12 text-slate-900"
-        >
-          My <span className="text-amber-500">Projects</span>
-        </motion.h2>
+    <section
+      id="projects"
+      className="relative py-32 px-6 sm:px-10 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto flex flex-col gap-28">
 
-        {/* Project Grid */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
-          {projectData.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants(index)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.5 }}
-              className="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(245,158,11,0.25)] hover:-translate-y-2"
+        {/* Section Header */}
+        <div className="max-w-3xl">
+          <span
+            className="
+              inline-block mb-4
+              px-4 py-1.5 rounded-full
+              text-xs tracking-widest uppercase
+              bg-[rgba(255,77,77,0.12)]
+              text-[#ff4d4d]
+              border border-[rgba(255,77,77,0.25)]
+            "
+          >
+            Engagements
+          </span>
+
+          <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+            Selected
+            <br />
+            <span className="text-[#ff4d4d]">application engagements</span>
+          </h2>
+
+          <p className="mt-6 text-lg text-[var(--text-muted)]">
+            MERN-based applications treated as real-world systems — analyzed
+            from both a developer and offensive security perspective.
+          </p>
+        </div>
+
+        {/* Project Blocks */}
+        <div className="flex flex-col gap-32">
+          {projects.map((project, index) => (
+            <div
+              key={project.title}
+              className={`
+                grid grid-cols-1 lg:grid-cols-2
+                gap-16 items-center
+                ${index % 2 !== 0 ? "lg:grid-flow-col-dense" : ""}
+              `}
             >
+              {/* Text */}
+              <div className={index % 2 !== 0 ? "lg:col-start-2" : ""}>
+                <h3 className="text-3xl font-semibold mb-3">
+                  {project.title}
+                </h3>
+
+                <p className="text-sm text-[#ff4d4d] mb-6">
+                  {project.subtitle}
+                </p>
+
+                <p className="text-[var(--text-muted)] leading-relaxed max-w-xl mb-8">
+                  {project.description}
+                </p>
+
+                <a
+                  href={project.link}
+                  className="
+                    inline-flex items-center gap-2
+                    text-sm font-medium text-[#ff4d4d]
+                    hover:underline
+                  "
+                >
+                  View Project Details →
+                </a>
+              </div>
+
               {/* Image */}
-              <div className="w-full aspect-[16/9] overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              <div className="relative flex justify-center">
+                {/* Subtle glow */}
+                <div
+                  className="
+                    absolute inset-0
+                    rounded-2xl
+                    bg-[radial-gradient(circle,
+                    rgba(255,77,77,0.25),
+                    transparent_60%)]
+                    blur-2xl
+                  "
                 />
-              </div>
 
-              {/* Content */}
-              <div className="p-6 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-2xl font-semibold text-slate-800 mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-600 mb-6">{project.description}</p>
-                </div>
-
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-5 py-2.5 bg-amber-500 text-white rounded-md font-semibold hover:bg-amber-600 transition-all"
-                  >
-                    <FaGithub className="mr-2" /> GitHub
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-5 py-2.5 border border-amber-500 text-amber-600 rounded-md font-semibold hover:bg-amber-500 hover:text-white transition-all"
-                  >
-                    <FaExternalLinkAlt className="mr-2" /> View Live
-                  </a>
+                <div
+                  className="
+                    relative
+                    w-full max-w-md h-64 md:h-72
+                    rounded-2xl
+                    bg-[rgba(11,18,32,0.65)]
+                    backdrop-blur-xl
+                    border border-[var(--border-subtle)]
+                    overflow-hidden
+                    shadow-[0_0_40px_rgba(255,77,77,0.18)]
+                  "
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-90"
+                  />
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
+
+      {/* Bottom fade */}
+      <div
+        className="
+          absolute bottom-0 left-0 w-full h-32
+          bg-gradient-to-t from-[var(--bg-dark)] to-transparent
+          pointer-events-none
+        "
+      />
     </section>
   );
 };

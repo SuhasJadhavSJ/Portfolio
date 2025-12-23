@@ -1,81 +1,119 @@
-import React, { useState } from "react";
+import React from "react";
+import { Mail, Github, Linkedin } from "lucide-react";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
   return (
     <section
       id="contact"
-      className="min-h-screen flex flex-col justify-center items-center bg-[#F9FAFB] text-slate-900 px-4 pt-16 pb-8"
+      className="relative py-32 px-6 sm:px-10 overflow-hidden"
     >
-      <div className="max-w-4xl w-full">
-        <h2 className="text-4xl font-bold mb-6 text-center">
-          Contact <span className="text-amber-500">Me</span>
-        </h2>
-        <p className="text-center mb-10 text-slate-600">
-          Feel free to reach out for collaborations, freelance work, or just to say hello.
-        </p>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-6 bg-white p-8 rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(245,158,11,0.1)]"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="p-3 rounded-md border border-gray-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="p-3 rounded-md border border-gray-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-          />
-
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows="5"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            className="p-3 rounded-md border border-gray-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-          ></textarea>
-
-          <button
-            type="submit"
-            className="bg-amber-500 text-white font-semibold py-3 rounded-md hover:bg-amber-600 transition-all duration-300"
+        {/* Left: Intent */}
+        <div className="lg:col-span-6">
+          <span
+            className="
+              inline-block mb-4
+              px-4 py-1.5 rounded-full
+              text-xs tracking-widest uppercase
+              bg-[rgba(255,77,77,0.12)]
+              text-[#ff4d4d]
+              border border-[rgba(255,77,77,0.25)]
+            "
           >
-            Send Message
-          </button>
-        </form>
+            Contact
+          </span>
+
+          <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            Initiate
+            <br />
+            <span className="text-[#ff4d4d]">communication.</span>
+          </h2>
+
+          <p className="text-lg text-[var(--text-muted)] max-w-md mb-10">
+            Open to junior penetration testing opportunities, security
+            discussions, learning collaborations, and mentorship. If you’re
+            interested in offensive security or application security, feel free
+            to reach out.
+          </p>
+
+          <a
+            href="mailto:suhas@example.com"
+            className="
+              inline-flex items-center gap-3
+              px-8 py-3 rounded-xl
+              bg-[#ff4d4d] text-black font-medium
+              hover:shadow-[0_0_30px_rgba(255,77,77,0.45)]
+              transition
+            "
+          >
+            <Mail size={18} />
+            Send Secure Email
+          </a>
+        </div>
+
+        {/* Divider */}
+        <div className="hidden lg:block lg:col-span-1 h-full">
+          <div className="w-px h-full bg-[var(--border-subtle)] mx-auto" />
+        </div>
+
+        {/* Right: Channels */}
+        <div className="lg:col-span-5 space-y-10">
+
+          <div className="flex items-start gap-4">
+            <Mail className="text-[#ff4d4d] mt-1" size={20} />
+            <div>
+              <p className="text-sm text-[var(--text-muted)] mb-1">Email</p>
+              <a
+                href="mailto:suhas@example.com"
+                className="text-lg font-medium hover:text-[#ff4d4d] transition"
+              >
+                suhas@example.com
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <Github className="text-[#ff4d4d] mt-1" size={20} />
+            <div>
+              <p className="text-sm text-[var(--text-muted)] mb-1">GitHub</p>
+              <a
+                href="https://github.com/your-username"
+                target="_blank"
+                rel="noreferrer"
+                className="text-lg font-medium hover:text-[#ff4d4d] transition"
+              >
+                github.com/your-username
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <Linkedin className="text-[#ff4d4d] mt-1" size={20} />
+            <div>
+              <p className="text-sm text-[var(--text-muted)] mb-1">LinkedIn</p>
+              <a
+                href="https://linkedin.com/in/your-profile"
+                target="_blank"
+                rel="noreferrer"
+                className="text-lg font-medium hover:text-[#ff4d4d] transition"
+              >
+                linkedin.com/in/your-profile
+              </a>
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      {/* Bottom fade (consistent with entire site) */}
+      <div
+        className="
+          absolute bottom-0 left-0 w-full h-32
+          bg-gradient-to-t from-[var(--bg-dark)] to-transparent
+          pointer-events-none
+        "
+      />
     </section>
   );
 };

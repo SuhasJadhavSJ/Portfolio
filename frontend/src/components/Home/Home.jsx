@@ -1,178 +1,165 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import resume from "../../assets/Resume_Suhas.pdf";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { redTeamer } from "../../assets";
 
-const Home = () => {
-  const [showRole, setShowRole] = useState(false);
-  const [showDesc, setShowDesc] = useState(false);
+const Hero = () => {
+  const ref = useRef(null);
 
-  useEffect(() => {
-    const roleTimer = setTimeout(() => setShowRole(true), 1200);
-    const descTimer = setTimeout(() => setShowDesc(true), 2200);
-    return () => {
-      clearTimeout(roleTimer);
-      clearTimeout(descTimer);
-    };
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-  const name = "Suhas Jadhav";
-
-  // The paragraph we’ll animate word by word
-  const description =
-    "I build high-performance, visually refined, and user-focused web applications using modern technologies in the MERN stack. I craft clean, maintainable, and scalable solutions that bring ideas to life.";
-
-  // Split description into words
-  const words = description.split(" ");
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.97]);
 
   return (
     <section
+      ref={ref}
       id="home"
-      className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 bg-[#F9FAFB] text-slate-900 relative overflow-hidden"
+      className="
+        relative min-h-screen
+        px-6 pt-28
+        overflow-hidden
+      "
     >
-      <div className="max-w-3xl text-center">
-        {/* Greeting */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl sm:text-4xl font-semibold mb-3"
-        >
-          Hi! I’m
-        </motion.h1>
+      {/* Ambient background */}
+      <div
+        className="
+          absolute inset-0
+          bg-[radial-gradient(circle_at_top_left,
+          rgba(255,77,77,0.08),
+          transparent_60%)]
+          pointer-events-none
+        "
+      />
 
-        {/* Animated Name */}
-        <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 flex justify-center">
-          {name.split("").map((char, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: index * 0.05,
-                type: "spring",
-                stiffness: 200,
-              }}
-              className={
-                char === " "
-                  ? "mx-1"
-                  : "text-amber-500 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]"
-              }
-            >
-              {char}
-            </motion.span>
-          ))}
-
-          {/* Custom Blinking Cursor */}
-          <motion.span
-            className="ml-1 text-amber-600 font-bold"
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ repeat: Infinity, duration: 1 }}
-          >
-            |
-          </motion.span>
-        </motion.h1>
-
-        {/* Role Reveal */}
-        {showRole && (
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-xl sm:text-2xl font-semibold mb-4 text-slate-700"
-          >
-            Full Stack Web Developer
-          </motion.p>
-        )}
-
-        {/* Word-by-word description animation */}
-        {showDesc && (
+      <motion.div
+        style={{ opacity, scale }}
+        className="
+          relative z-10
+          max-w-7xl mx-auto
+          grid grid-cols-1 md:grid-cols-2
+          gap-14 items-center
+        "
+      >
+        {/* IMAGE — first on mobile */}
+        <div className="relative flex justify-center order-1 md:order-2">
+          {/* Continuous glow (single source) */}
           <motion.div
-            className="text-base sm:text-lg text-slate-600 mb-8 flex flex-wrap justify-center"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.05,
-                },
-              },
+            animate={{
+              opacity: [0.35, 0.55, 0.35],
             }}
-          >
-            {words.map((word, index) => (
-              <motion.span
-                key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.3 }}
-                className="mr-2"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.div>
-        )}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+              absolute
+              w-72 h-72 md:w-96 md:h-96
+              bg-[radial-gradient(circle,
+              rgba(255,77,77,0.45),
+              transparent_65%)]
+              blur-3xl
+            "
+          />
 
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.8, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 mb-10 justify-center"
-        >
-          <a
-            href="#projects"
-            className="px-6 py-3 bg-amber-500 text-white rounded-md font-semibold hover:bg-amber-600 transition-all"
+          {/* Image container (optically centered) */}
+          <div
+            className="
+              relative
+              w-64 h-80 md:w-72 md:h-96
+              rounded-[2.5rem]
+              bg-gradient-to-b
+              from-[rgba(255,77,77,0.22)]
+              to-[rgba(255,77,77,0.05)]
+              border border-[rgba(255,77,77,0.35)]
+              overflow-hidden
+              shadow-[0_0_35px_rgba(255,77,77,0.3)]
+            "
           >
-            View My Work
-          </a>
-          <a
-            href={resume}
-            download="Suhas_Jadhav_Resume.pdf"
-            className="px-6 py-3 border border-amber-500 text-amber-600 rounded-md font-semibold hover:bg-amber-500 hover:text-white transition-all"
-          >
-            Download Resume
-          </a>
-        </motion.div>
+            <img
+              src={redTeamer}
+              alt="Red teamer silhouette"
+              className="w-full h-full object-cover opacity-90"
+            />
+          </div>
+        </div>
 
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3.2, duration: 1 }}
-          className="flex justify-center gap-8 text-2xl text-slate-700"
-        >
-          <a
-            href="https://github.com/SuhasJadhavSJ"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-amber-500 transition-all"
+        {/* TEXT */}
+        <div className="order-2 md:order-1">
+          {/* Micro label */}
+          <span
+            className="
+              inline-block mb-6
+              px-4 py-1.5 rounded-full
+              text-xs tracking-widest uppercase
+              bg-[rgba(255,77,77,0.12)]
+              text-[#ff4d4d]
+              border border-[rgba(255,77,77,0.25)]
+            "
           >
-            <FaGithub />
-          </a>
-          <a
-            href="https://www.instagram.com/suhas__jadhav/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-amber-500 transition-all"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/suhas-jadhav-60214420b"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-amber-500 transition-all"
-          >
-            <FaLinkedin />
-          </a>
-        </motion.div>
-      </div>
+            Offensive Security • Red Team • MERN
+          </span>
+
+          <h1 className="text-4xl md:text-6xl xl:text-7xl font-bold leading-tight">
+            Junior{" "}
+            <span className="text-[#ff4d4d]">Penetration Tester</span>
+            <br />
+            & Red Team Trainee
+          </h1>
+
+          <p className="mt-8 max-w-xl text-base md:text-lg text-[var(--text-muted)]">
+            I specialize in offensive security fundamentals — simulating
+            real-world attacks to identify, exploit, and report security
+            weaknesses across web, network, and Active Directory environments.
+            I leverage my MERN stack background to analyze application internals
+            and real-world attack surfaces.
+          </p>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              href="/resume.pdf"
+              download
+              className="
+                px-7 py-3 rounded-xl
+                bg-[#ff4d4d]
+                text-black font-medium
+                hover:brightness-110
+                hover:shadow-[0_0_30px_rgba(255,77,77,0.45)]
+                transition
+              "
+            >
+              Download Resume
+            </a>
+
+            <a
+              href="#projects"
+              className="
+                px-7 py-3 rounded-xl
+                border border-[var(--border-subtle)]
+                hover:border-[#ff4d4d]
+                hover:text-[#ff4d4d]
+                transition
+              "
+            >
+              View Engagements
+            </a>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Bottom fade */}
+      <div
+        className="
+          absolute bottom-0 left-0 w-full h-32
+          bg-gradient-to-t from-[var(--bg-dark)] to-transparent
+          pointer-events-none
+        "
+      />
     </section>
   );
 };
 
-export default Home;
+export default Hero;
