@@ -8,7 +8,6 @@ const Contact = () => {
       className="relative py-32 px-6 sm:px-10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-
         {/* Left: Intent */}
         <div className="lg:col-span-6">
           <span
@@ -38,14 +37,16 @@ const Contact = () => {
           </p>
 
           <a
-            href="mailto:suhas@example.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=suhasjadhavsj046@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="
-              inline-flex items-center gap-3
-              px-8 py-3 rounded-xl
-              bg-[#ff4d4d] text-black font-medium
-              hover:shadow-[0_0_30px_rgba(255,77,77,0.45)]
-              transition
-            "
+    inline-flex items-center gap-3
+    px-8 py-3 rounded-xl
+    bg-[#ff4d4d] text-black font-medium
+    hover:shadow-[0_0_30px_rgba(255,77,77,0.45)]
+    transition
+  "
           >
             <Mail size={18} />
             Send Secure Email
@@ -59,16 +60,17 @@ const Contact = () => {
 
         {/* Right: Channels */}
         <div className="lg:col-span-5 space-y-10">
-
           <div className="flex items-start gap-4">
             <Mail className="text-[#ff4d4d] mt-1" size={20} />
             <div>
               <p className="text-sm text-[var(--text-muted)] mb-1">Email</p>
               <a
-                href="mailto:suhas@example.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=suhasjadhavsj046@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-lg font-medium hover:text-[#ff4d4d] transition"
               >
-                suhas@example.com
+                suhasjadhavsj046@gmail.com
               </a>
             </div>
           </div>
@@ -78,12 +80,12 @@ const Contact = () => {
             <div>
               <p className="text-sm text-[var(--text-muted)] mb-1">GitHub</p>
               <a
-                href="https://github.com/your-username"
+                href="https://github.com/SuhasJadhavSJ"
                 target="_blank"
                 rel="noreferrer"
                 className="text-lg font-medium hover:text-[#ff4d4d] transition"
               >
-                github.com/your-username
+                github.com/SuhasJadhavSJ
               </a>
             </div>
           </div>
@@ -93,16 +95,15 @@ const Contact = () => {
             <div>
               <p className="text-sm text-[var(--text-muted)] mb-1">LinkedIn</p>
               <a
-                href="https://linkedin.com/in/your-profile"
+                href="https://www.linkedin.com/in/suhas-jadhav-60214420b/"
                 target="_blank"
                 rel="noreferrer"
                 className="text-lg font-medium hover:text-[#ff4d4d] transition"
               >
-                linkedin.com/in/your-profile
+                linkedin.com/in/suhas-jadhav
               </a>
             </div>
           </div>
-
         </div>
       </div>
 

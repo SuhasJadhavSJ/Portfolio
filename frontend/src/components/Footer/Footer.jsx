@@ -31,7 +31,7 @@ const Footer = () => {
         {/* Channels */}
         <div className="flex items-center gap-6 text-lg">
           <a
-            href="https://github.com/yourgithub"
+            href="https://github.com/SuhasJadhavSJ"
             target="_blank"
             rel="noopener noreferrer"
             className="
@@ -45,7 +45,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://linkedin.com/in/yourlinkedin"
+            href="https://www.linkedin.com/in/suhas-jadhav-60214420b/"
             target="_blank"
             rel="noopener noreferrer"
             className="
@@ -59,7 +59,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://twitter.com/yourtwitter"
+            href="https://x.com/Suhas_Jadhav_sj"
             target="_blank"
             rel="noopener noreferrer"
             className="
