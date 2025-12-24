@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { resume } from "../../assets";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
