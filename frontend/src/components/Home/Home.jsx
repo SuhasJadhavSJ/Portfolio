@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { redTeamer } from "../../assets";
+import { redTeamer, blueTeamer } from "../../assets";
+import { useMode } from "../../context/ModeContext";
 
 const Hero = () => {
   const ref = useRef(null);
+  const { isRed } = useMode();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -13,25 +15,21 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.97]);
 
+  const accent = isRed ? "#ff4d4d" : "#4da6ff";
+  const heroImage = isRed ? redTeamer : blueTeamer;
+
   return (
     <section
       ref={ref}
       id="home"
-      className="
-        relative min-h-screen
-        px-6 pt-28
-        overflow-hidden
-      "
+      className="relative min-h-screen px-6 pt-28 overflow-hidden"
     >
       {/* Ambient background */}
       <div
-        className="
-          absolute inset-0
-          bg-[radial-gradient(circle_at_top_left,
-          rgba(255,77,77,0.08),
-          transparent_60%)]
-          pointer-events-none
-        "
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at top left, ${accent}22, transparent 60%)`,
+        }}
       />
 
       <motion.div
@@ -43,46 +41,36 @@ const Hero = () => {
           gap-14 items-center
         "
       >
-        {/* IMAGE — first on mobile */}
+        {/* IMAGE */}
         <div className="relative flex justify-center order-1 md:order-2">
-          {/* Continuous glow (single source) */}
+          {/* Continuous glow */}
           <motion.div
-            animate={{
-              opacity: [0.35, 0.55, 0.35],
+            animate={{ opacity: [0.35, 0.55, 0.35] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute w-72 h-72 md:w-96 md:h-96 blur-3xl"
+            style={{
+              background: `radial-gradient(circle, ${accent}55, transparent 65%)`,
             }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="
-              absolute
-              w-72 h-72 md:w-96 md:h-96
-              bg-[radial-gradient(circle,
-              rgba(255,77,77,0.45),
-              transparent_65%)]
-              blur-3xl
-            "
           />
 
-          {/* Image container (optically centered) */}
+          {/* Image container */}
           <div
-            className="
-              relative
-              w-64 h-80 md:w-72 md:h-96
-              rounded-[2.5rem]
-              bg-gradient-to-b
-              from-[rgba(255,77,77,0.22)]
-              to-[rgba(255,77,77,0.05)]
-              border border-[rgba(255,77,77,0.35)]
-              overflow-hidden
-              shadow-[0_0_35px_rgba(255,77,77,0.3)]
-            "
+            className="relative w-64 h-80 md:w-72 md:h-96 rounded-[2.5rem]
+              overflow-hidden border shadow-[0_0_35px]"
+            style={{
+              borderColor: `${accent}59`,
+              boxShadow: `0 0 35px ${accent}55`,
+              background: `linear-gradient(to bottom, ${accent}33, ${accent}0D)`,
+            }}
           >
-            <img
-              src={redTeamer}
-              alt="Red teamer silhouette"
+            <motion.img
+              key={isRed ? "red" : "blue"}
+              src={heroImage}
+              alt={isRed ? "Red team operator" : "Blue team analyst"}
               className="w-full h-full object-cover opacity-90"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
             />
           </div>
         </div>
@@ -91,60 +79,73 @@ const Hero = () => {
         <div className="order-2 md:order-1">
           {/* Micro label */}
           <span
-            className="
-              inline-block mb-6
-              px-4 py-1.5 rounded-full
-              text-xs tracking-widest uppercase
-              bg-[rgba(255,77,77,0.12)]
-              text-[#ff4d4d]
-              border border-[rgba(255,77,77,0.25)]
-            "
+            className="inline-block mb-6 px-4 py-1.5 rounded-full
+              text-xs tracking-widest uppercase border"
+            style={{
+              backgroundColor: `${accent}1F`,
+              borderColor: `${accent}40`,
+              color: accent,
+            }}
           >
-            Offensive Security • Red Team • MERN
+            {isRed
+              ? "Offensive Security • Red Team • MERN"
+              : "Defensive Security • Blue Team • MERN"}
           </span>
 
           <h1 className="text-4xl md:text-6xl xl:text-7xl font-bold leading-tight">
-            Junior{" "}
-            <span className="text-[#ff4d4d]">Penetration Tester</span>
-            <br />
-            & Red Team Trainee
+            {isRed ? (
+              <>
+                Junior <span style={{ color: accent }}>Penetration Tester</span>
+                <br />& Red Team Trainee
+              </>
+            ) : (
+              <>
+                Junior <span style={{ color: accent }}>Security Analyst</span>
+                <br />& Blue Team Trainee
+              </>
+            )}
           </h1>
 
           <p className="mt-8 max-w-xl text-base md:text-lg text-[var(--text-muted)]">
-            I specialize in offensive security fundamentals — simulating
-            real-world attacks to identify, exploit, and report security
-            weaknesses across web, network, and Active Directory environments.
-            I leverage my MERN stack background to analyze application internals
-            and real-world attack surfaces.
+            {isRed ? (
+              <>
+                I focus on offensive security fundamentals — simulating
+                real-world attacks to identify, exploit, and report security
+                weaknesses across web and application environments. My MERN
+                stack background helps me reason about application internals and
+                attack surfaces.
+              </>
+            ) : (
+              <>
+                I focus on defensive security fundamentals — understanding how
+                attacks are detected, analyzed, and mitigated across modern web
+                systems. My MERN stack background helps me reason about logs,
+                misconfigurations, and secure application design.
+              </>
+            )}
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="/resume.pdf"
               download
-              className="
-                px-7 py-3 rounded-xl
-                bg-[#ff4d4d]
-                text-black font-medium
-                hover:brightness-110
-                hover:shadow-[0_0_30px_rgba(255,77,77,0.45)]
-                transition
-              "
+              className="px-7 py-3 rounded-xl text-black font-medium transition"
+              style={{
+                backgroundColor: accent,
+                boxShadow: `0 0 30px ${accent}73`,
+              }}
             >
               Download Resume
             </a>
 
             <a
               href="#projects"
-              className="
-                px-7 py-3 rounded-xl
-                border border-[var(--border-subtle)]
-                hover:border-[#ff4d4d]
-                hover:text-[#ff4d4d]
-                transition
-              "
+              className="px-7 py-3 rounded-xl border transition"
+              style={{
+                borderColor: "var(--border-subtle)",
+              }}
             >
-              View Engagements
+              {isRed ? "View Engagements" : "View Defenses"}
             </a>
           </div>
         </div>

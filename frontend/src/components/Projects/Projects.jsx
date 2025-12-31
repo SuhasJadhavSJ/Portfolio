@@ -1,33 +1,47 @@
 import React from "react";
 import { resQHome, unityShare, pathForge } from "../../assets";
-const projects = [
-  {
-    title: "ResQHome",
-    subtitle: "MERN-based emergency response & coordination platform",
-    description:
-      "ResQHome is a full-stack MERN application designed to coordinate emergency responses efficiently. The platform handles authentication, role-based access, real-time data flow, and backend APIs — making it a realistic attack surface for testing authentication, authorization, and data exposure flaws.",
-    image: resQHome,
-    link: "#",
-  },
-  {
-    title: "PathForge",
-    subtitle: "AI-assisted career guidance & recommendation system",
-    description:
-      "PathForge is a MERN application focused on personalized career pathways and recommendations. From a security perspective, it presents complex logic flows, user data handling, and API interactions that are ideal for analyzing access control, business logic flaws, and injection vectors.",
-    image: pathForge,
-    link: "https://path-forge-kappa.vercel.app/",
-  },
-  {
-    title: "UnityShare",
-    subtitle: "Community-driven resource sharing platform",
-    description:
-      "UnityShare enables users to share and manage resources within a community. Built on the MERN stack, it includes authentication flows, CRUD operations, and backend validations — offering practical exposure to common web security risks and mitigation strategies.",
-    image: unityShare,
-    link: "#",
-  },
-];
+import { useMode } from "../../context/ModeContext";
 
 const Projects = () => {
+  const { isRed } = useMode();
+  const accent = isRed ? "#ff4d4d" : "#4da6ff";
+
+  const projects = [
+    {
+      title: "ResQHome",
+      subtitle: isRed
+        ? "Attack surface analysis of an emergency coordination platform"
+        : "Defensive analysis of an emergency coordination platform",
+      description: isRed
+        ? "ResQHome is treated as a real-world attack surface, focusing on authentication flows, role-based access, API authorization, and data exposure risks common in emergency-response systems."
+        : "ResQHome is analyzed from a defensive perspective, focusing on secure authentication design, access control enforcement, logging of sensitive actions, and reducing data exposure risk.",
+      image: resQHome,
+      link: "#",
+    },
+    {
+      title: "PathForge",
+      subtitle: isRed
+        ? "Business logic & access control analysis in AI-driven systems"
+        : "Secure design considerations for AI-driven systems",
+      description: isRed
+        ? "PathForge presents complex business logic and user flows that are useful for analyzing authorization bypasses, business logic abuse, and injection risks in MERN-based systems."
+        : "PathForge is reviewed with a focus on securing user data, enforcing access boundaries, validating AI-driven inputs, and ensuring proper logging and monitoring of sensitive operations.",
+      image: pathForge,
+      link: "https://path-forge-kappa.vercel.app/",
+    },
+    {
+      title: "UnityShare",
+      subtitle: isRed
+        ? "Authentication & data exposure risks in community platforms"
+        : "Hardening authentication & data handling in community platforms",
+      description: isRed
+        ? "UnityShare is analyzed for common web vulnerabilities such as broken authentication, insecure CRUD operations, and insufficient backend validation in community-driven platforms."
+        : "UnityShare is evaluated for defensive controls including input validation, access enforcement, audit logging, and mitigation of common web application risks.",
+      image: unityShare,
+      link: "#",
+    },
+  ];
+
   return (
     <section
       id="projects"
@@ -38,27 +52,29 @@ const Projects = () => {
         {/* Section Header */}
         <div className="max-w-3xl">
           <span
-            className="
-              inline-block mb-4
-              px-4 py-1.5 rounded-full
-              text-xs tracking-widest uppercase
-              bg-[rgba(255,77,77,0.12)]
-              text-[#ff4d4d]
-              border border-[rgba(255,77,77,0.25)]
-            "
+            className="inline-block mb-4 px-4 py-1.5 rounded-full
+              text-xs tracking-widest uppercase border"
+            style={{
+              backgroundColor: `${accent}1F`,
+              borderColor: `${accent}40`,
+              color: accent,
+            }}
           >
-            Engagements
+            {isRed ? "Engagements" : "Defensive Reviews"}
           </span>
 
           <h2 className="text-4xl md:text-5xl font-bold leading-tight">
             Selected
             <br />
-            <span className="text-[#ff4d4d]">application engagements</span>
+            <span style={{ color: accent }}>
+              {isRed ? "application engagements" : "application analyses"}
+            </span>
           </h2>
 
           <p className="mt-6 text-lg text-[var(--text-muted)]">
-            MERN-based applications treated as real-world systems — analyzed
-            from both a developer and offensive security perspective.
+            {isRed
+              ? "MERN-based applications treated as real-world systems and analyzed from an offensive security perspective."
+              : "MERN-based applications analyzed from a defensive and secure-design perspective."}
           </p>
         </div>
 
@@ -79,7 +95,7 @@ const Projects = () => {
                   {project.title}
                 </h3>
 
-                <p className="text-sm text-[#ff4d4d] mb-6">
+                <p className="text-sm mb-6" style={{ color: accent }}>
                   {project.subtitle}
                 </p>
 
@@ -89,41 +105,31 @@ const Projects = () => {
 
                 <a
                   href={project.link}
-                  className="
-                    inline-flex items-center gap-2
-                    text-sm font-medium text-[#ff4d4d]
-                    hover:underline
-                  "
+                  className="inline-flex items-center gap-2
+                    text-sm font-medium hover:underline"
+                  style={{ color: accent }}
                 >
-                  View Project Details →
+                  {isRed ? "View Engagement Details →" : "View Analysis →"}
                 </a>
               </div>
 
               {/* Image */}
               <div className="relative flex justify-center">
-                {/* Subtle glow */}
                 <div
-                  className="
-                    absolute inset-0
-                    rounded-2xl
-                    bg-[radial-gradient(circle,
-                    rgba(255,77,77,0.25),
-                    transparent_60%)]
-                    blur-2xl
-                  "
+                  className="absolute inset-0 rounded-2xl blur-2xl"
+                  style={{
+                    background: `radial-gradient(circle, ${accent}40, transparent 60%)`,
+                  }}
                 />
 
                 <div
-                  className="
-                    relative
-                    w-full max-w-md h-64 md:h-72
-                    rounded-2xl
-                    bg-[rgba(11,18,32,0.65)]
-                    backdrop-blur-xl
-                    border border-[var(--border-subtle)]
-                    overflow-hidden
-                    shadow-[0_0_40px_rgba(255,77,77,0.18)]
-                  "
+                  className="relative w-full max-w-md h-64 md:h-72 rounded-2xl
+                    bg-[rgba(11,18,32,0.65)] backdrop-blur-xl
+                    border overflow-hidden"
+                  style={{
+                    borderColor: "var(--border-subtle)",
+                    boxShadow: `0 0 40px ${accent}30`,
+                  }}
                 >
                   <img
                     src={project.image}

@@ -1,15 +1,15 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { useMode } from "../../context/ModeContext";
 
 const Footer = () => {
+  const { isRed } = useMode();
+  const accent = isRed ? "#ff4d4d" : "#4da6ff";
+
   return (
     <footer
-      className="
-        relative
-        bg-[var(--bg-dark)]
-        border-t border-[rgba(255,77,77,0.15)]
-        py-8
-      "
+      className="relative bg-[var(--bg-dark)] border-t py-8"
+      style={{ borderColor: `${accent}26` }}
     >
       <div
         className="
@@ -26,6 +26,9 @@ const Footer = () => {
           <span className="text-[var(--text-main)] font-medium">
             Suhas Jadhav
           </span>
+          <span className="ml-2 opacity-80">
+            · {isRed ? "Offensive Security" : "Defensive Security"}
+          </span>
         </div>
 
         {/* Channels */}
@@ -34,11 +37,12 @@ const Footer = () => {
             href="https://github.com/SuhasJadhavSJ"
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              text-[var(--text-muted)]
-              hover:text-[#ff4d4d]
-              transition
-            "
+            className="text-[var(--text-muted)] transition"
+            style={{ color: "var(--text-muted)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = accent)}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "var(--text-muted)")
+            }
             aria-label="GitHub"
           >
             <FaGithub />
@@ -48,11 +52,11 @@ const Footer = () => {
             href="https://www.linkedin.com/in/suhas-jadhav-60214420b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              text-[var(--text-muted)]
-              hover:text-[#ff4d4d]
-              transition
-            "
+            className="text-[var(--text-muted)] transition"
+            onMouseEnter={(e) => (e.currentTarget.style.color = accent)}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "var(--text-muted)")
+            }
             aria-label="LinkedIn"
           >
             <FaLinkedin />
@@ -62,11 +66,11 @@ const Footer = () => {
             href="https://x.com/Suhas_Jadhav_sj"
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              text-[var(--text-muted)]
-              hover:text-[#ff4d4d]
-              transition
-            "
+            className="text-[var(--text-muted)] transition"
+            onMouseEnter={(e) => (e.currentTarget.style.color = accent)}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "var(--text-muted)")
+            }
             aria-label="Twitter / X"
           >
             <FaTwitter />

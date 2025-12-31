@@ -7,65 +7,112 @@ import {
   FileText,
   Brain,
   Code,
+  Activity,
+  Eye,
 } from "lucide-react";
-
-const skills = [
-  {
-    icon: Shield,
-    title: "Foundational Cyber Security",
-    desc: "Understanding core security principles across application, network, and Active Directory environments.",
-  },
-  {
-    icon: Crosshair,
-    title: "Offensive Security Frameworks",
-    desc: "Applying structured methodologies to conduct systematic and repeatable penetration tests.",
-  },
-  {
-    icon: Bug,
-    title: "OWASP Top 10 Vulnerabilities",
-    desc: "Identifying, exploiting, and assessing real-world application security flaws and misconfigurations.",
-  },
-  {
-    icon: ArrowUpRight,
-    title: "Privilege Escalation",
-    desc: "Analyzing systems to escalate privileges in both networked and application-based environments.",
-  },
-  {
-    icon: FileText,
-    title: "Security Reporting",
-    desc: "Producing clear, actionable reports that communicate risk, impact, and remediation steps.",
-  },
-  {
-    icon: Brain,
-    title: "Pentester Mindset",
-    desc: "Thinking like an attacker to anticipate threats and uncover weaknesses before exploitation.",
-  },
-  {
-    icon: Code,
-    title: "Application Security (MERN Stack)",
-    desc: "Leveraging hands-on experience with React, Node.js, Express, and databases to analyze application logic, authentication flows, and attack surfaces.",
-  },
-];
+import { useMode } from "../../context/ModeContext";
 
 const Skills = () => {
+  const { isRed } = useMode();
+  const accent = isRed ? "#ff4d4d" : "#4da6ff";
+
+  const skills = isRed
+    ? [
+        {
+          icon: Shield,
+          title: "Foundational Cyber Security",
+          desc: "Understanding core security principles across application, network, and Active Directory environments.",
+        },
+        {
+          icon: Crosshair,
+          title: "Offensive Security Methodology",
+          desc: "Applying structured approaches for enumeration, exploitation, and validation during penetration testing.",
+        },
+        {
+          icon: Bug,
+          title: "OWASP Top 10",
+          desc: "Identifying, exploiting, and assessing common application vulnerabilities and misconfigurations.",
+        },
+        {
+          icon: ArrowUpRight,
+          title: "Privilege Escalation",
+          desc: "Analyzing systems and applications to escalate privileges during controlled attack simulations.",
+        },
+        {
+          icon: FileText,
+          title: "Security Reporting",
+          desc: "Producing clear, actionable reports communicating risk, impact, and remediation steps.",
+        },
+        {
+          icon: Brain,
+          title: "Attacker Mindset",
+          desc: "Thinking like an adversary to anticipate attack paths and uncover weaknesses proactively.",
+        },
+        {
+          icon: Code,
+          title: "Application Security (MERN)",
+          desc: "Using React, Node.js, Express, and databases knowledge to analyze logic flaws, auth issues, and attack surfaces.",
+        },
+      ]
+    : [
+        {
+          icon: Shield,
+          title: "Security Fundamentals",
+          desc: "Understanding how systems are protected across application, network, and infrastructure layers.",
+        },
+        {
+          icon: Activity,
+          title: "Threat Awareness",
+          desc: "Recognizing common attack techniques and how they appear in logs, alerts, and system behavior.",
+        },
+        {
+          icon: Eye,
+          title: "Monitoring & Visibility",
+          desc: "Learning how events, logs, and telemetry provide visibility into suspicious activity.",
+        },
+        {
+          icon: Bug,
+          title: "Vulnerability Awareness",
+          desc: "Understanding common weaknesses and how they are detected, prioritized, and mitigated.",
+        },
+        {
+          icon: FileText,
+          title: "Incident Understanding",
+          desc: "Analyzing alerts and incidents to understand impact, scope, and defensive response steps.",
+        },
+        {
+          icon: Brain,
+          title: "Defender Mindset",
+          desc: "Reasoning about attacker intent, detection gaps, and defensive improvements.",
+        },
+        {
+          icon: Code,
+          title: "Secure Application Design (MERN)",
+          desc: "Using MERN stack knowledge to reason about secure authentication, logging, configuration, and access control.",
+        },
+      ];
+
   return (
-    <section
-      id="skills"
-      className="relative py-32 px-6 overflow-hidden"
-    >
+    <section id="skills" className="relative py-32 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
         <div className="text-center mb-24">
-          <p className="text-sm tracking-widest uppercase text-[#ff4d4d] mb-4">
+          <p
+            className="text-sm tracking-widest uppercase mb-4"
+            style={{ color: accent }}
+          >
             Skills
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold">
-            Key capabilities evaluated
+            {isRed ? "Offensive Capabilities" : "Defensive Capabilities"}
           </h2>
 
-          <div className="mt-6 mx-auto h-[3px] w-20 bg-[#ff4d4d] rounded-full" />
+          <div
+            className="mt-6 mx-auto h-[3px] w-20 rounded-full"
+            style={{ backgroundColor: accent }}
+          />
         </div>
 
         {/* Skills Grid */}
@@ -77,16 +124,15 @@ const Skills = () => {
 
                 {/* Icon */}
                 <div
-                  className="
-                    mx-auto mb-6
-                    w-14 h-14 rounded-full
-                    flex items-center justify-center
-                    bg-[rgba(255,77,77,0.12)]
-                    border border-[rgba(255,77,77,0.35)]
-                    shadow-[0_0_25px_rgba(255,77,77,0.25)]
-                  "
+                  className="mx-auto mb-6 w-14 h-14 rounded-full
+                    flex items-center justify-center border"
+                  style={{
+                    backgroundColor: `${accent}1F`,
+                    borderColor: `${accent}59`,
+                    boxShadow: `0 0 25px ${accent}40`,
+                  }}
                 >
-                  <Icon size={22} className="text-[#ff4d4d]" />
+                  <Icon size={22} style={{ color: accent }} />
                 </div>
 
                 {/* Title */}
