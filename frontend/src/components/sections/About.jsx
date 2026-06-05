@@ -10,7 +10,7 @@ export default function About() {
     },
     {
       label: "TryHackMe Rooms",
-      value: "50+",
+      value: "150+",
       color: "#00d9ff",
     },
     {

@@ -3,11 +3,11 @@ export const profile = {
   title: "Cybersecurity Analyst",
   roles: ["Red Team", "Blue Team", "SOC Operations"],
   location: "Chhatrapati Sambhaji Nagar, MH",
-  phone: "+91 84983-62673",
+  phone: "+91 84838-62673",
   email: "suhasjadhavsj046@gmail.com",
-  github: "github.com/suhasjadhav",
-  linkedin: "linkedin.com/in/suhasjadhav",
-  tryhackme: "tryhackme.com/p/suhasjadhav",
+  github: "github.com/suhasjadhavsj",
+  linkedin: "linkedin.com/in/suhas-jadhav-60214420b",
+  tryhackme: "tryhackme.com/p/suhasjadhavsj046",
   summary:
     "Final-year B.Tech Computer Science student with hands-on offensive and defensive security experience across home labs, TryHackMe simulations, and structured incident response exercises. Proficient in SIEM monitoring (Wazuh, Splunk), network traffic analysis (Wireshark), and vulnerability assessment (Nmap, OpenVAS). Skilled in red team techniques including exploitation, privilege escalation, and lateral movement, alongside blue team capabilities in log analysis, IOC identification, and NIST SP 800-61 incident response. Seeking a fresher SOC Analyst, Security Analyst, or Blue/Red Team role to apply technical knowledge in a live operational environment.",
 };
